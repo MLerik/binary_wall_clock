@@ -24,11 +24,11 @@ minute_pins = [26, 19, 13, 15, 14, 17]
 second_pins = [21, 20, 16, 12, 7, 25]
 bin_clock = LedClock(hour_pins, minute_pins, second_pins)
 led_display = LED_Display()
-led_display.scroll_text("HEJSAN ERIK OCH AKE ", 1, 100)
+#led_display.scroll_text("HEJSAN ERIK OCH AKE ", 1, 100)
 while True:
     bin_clock.display_time()
 
     currtime = datetime.datetime.now()
     if currtime.second == 0:
         im_idx = np.random.randint(0, len(im_array))
-        led_display.scroll_matrix(matrix=im_array, sweeps=1, speed=1)
+        led_display.scroll_matrix(matrix=im_array[im_idx], sweeps=1, speed=1)
