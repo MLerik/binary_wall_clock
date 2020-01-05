@@ -31,4 +31,4 @@ while True:
     currtime = datetime.datetime.now()
     if currtime.second == 0:
         im_idx = np.random.randint(0, len(im_array))
-        led_display.scroll_matrix(matrix=txt_matrix, sweeps=1, speed=1)
+        led_display.scroll_matrix(matrix=im_array, sweeps=1, speed=1)
