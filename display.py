@@ -3,10 +3,6 @@ import time  # calling for time to provide delays in program
 import numpy as np
 from PIL import Image
 
-x = 1
-y = 1
-
-
 
 class LED_Display():
 
