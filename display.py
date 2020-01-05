@@ -2,12 +2,13 @@ import RPi.GPIO as IO
 import time  # calling for time to provide delays in program
 import numpy as np
 from PIL import Image
+
 x = 1
 y = 1
 
+pos_pins = [12, 22, 27, 25, 17, 24, 23, 18]
+neg_pins = [21, 20, 26, 16, 19, 13, 6, 5]
 
-pos_pins = [12,22,27,25,17,24,23,18]
-neg_pins = [21,20,26,16,19,13,6,5]
 
 class LED_Display():
 
@@ -44,31 +45,28 @@ class LED_Display():
             IO.output(pos_pins[i], 0)
             IO.output(neg_pins[i], 1)
 
-
-    def light_led(self,x,y,sleep_time=-1):
-        IO.output(pos_pins[7-y], 0)
-        IO.output(neg_pins[7-x], 1)
+    def light_led(self, x, y, sleep_time=-1):
+        IO.output(pos_pins[7 - y], 0)
+        IO.output(neg_pins[7 - x], 1)
         if sleep_time > 0:
             time.sleep(sleep_time)
             IO.output(pos_pins[7 - y], 1)
             IO.output(neg_pins[7 - x], 0)
-
 
     def display_matrix(self, mat, steps):
         lighted_leds = []
         for y in range(8):
             for x in range(8):
                 if mat[y, x] >= 1:
-                    lighted_leds.append((x,y))
+                    lighted_leds.append((x, y))
         if len(lighted_leds) < 1:
             time.sleep(0.2)
 
         for t in range(steps):
             for i in range(len(lighted_leds)):
-                self.light_led(lighted_leds[i][0],7-lighted_leds[i][1], 0.0001)
+                self.light_led(lighted_leds[i][0], 7 - lighted_leds[i][1], 0.0001)
 
-
-    def scroll_matrix(self,matrix,sweeps,speed):
+    def scroll_matrix(self, matrix, sweeps, speed):
         """
 
         :param matrix:
@@ -77,11 +75,11 @@ class LED_Display():
         :return:
         """
         for sw in range(sweeps):
-            for step in range(np.shape(matrix)[1]-8):
-                curr_window = matrix[:,step:step+8]
-                self.display_matrix(curr_window,speed)
+            for step in range(np.shape(matrix)[1] - 8):
+                curr_window = matrix[:, step:step + 8]
+                self.display_matrix(curr_window, speed)
 
-    def scroll_text(self,text,sweeps,speed):
+    def scroll_text(self, text, sweeps, speed):
         """
         This is a function to scroll text across a 8x8 LED Display
         :param text: Input text that should scroll on display
@@ -97,11 +95,11 @@ class LED_Display():
                 C = "star"
             if C == "#":
                 C = "heart"
-            letter_im = Image.open("./imgs/"+C+".bmp")
-            letter_array = 1- np.clip(np.array(letter_im),0,1)
+            letter_im = Image.open("./imgs/" + C + ".bmp")
+            letter_array = 1 - np.clip(np.array(letter_im), 0, 1)
             if initial:
                 word = letter_array
                 initial = False
             else:
-                word = np.concatenate((word,letter_array),axis=1)
-        self.scroll_matrix(word,sweeps,speed)
+                word = np.concatenate((word, letter_array), axis=1)
+        self.scroll_matrix(word, sweeps, speed)
