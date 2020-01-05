@@ -39,8 +39,8 @@ class LED_Display():
         :return:
         """
         for i in range(8):
-            IO.output(pos_pins[7 - i], 1)
-            IO.output(neg_pins[7 - i], 0)
+            IO.output(self.pos_pins[7 - i], 1)
+            IO.output(self.neg_pins[7 - i], 0)
 
     def fill_display(self):
         """
