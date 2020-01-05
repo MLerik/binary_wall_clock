@@ -6,8 +6,6 @@ from PIL import Image
 x = 1
 y = 1
 
-pos_pins = [12, 22, 27, 25, 17, 24, 23, 18]
-neg_pins = [21, 20, 26, 16, 19, 13, 6, 5]
 
 
 class LED_Display():
@@ -50,8 +48,8 @@ class LED_Display():
         :return:
         """
         for i in range(8):
-            IO.output(pos_pins[i], 0)
-            IO.output(neg_pins[i], 1)
+            IO.output(self.pos_pins[i], 0)
+            IO.output(self.neg_pins[i], 1)
 
     def light_led(self, x, y, sleep_time=-1):
         """
@@ -62,12 +60,12 @@ class LED_Display():
         :param sleep_time: Duration of LED light pulse
         :return:
         """
-        IO.output(pos_pins[7 - y], 0)
-        IO.output(neg_pins[7 - x], 1)
+        IO.output(self.pos_pins[7 - y], 0)
+        IO.output(self.neg_pins[7 - x], 1)
         if sleep_time > 0:
             time.sleep(sleep_time)
-            IO.output(pos_pins[7 - y], 1)
-            IO.output(neg_pins[7 - x], 0)
+            IO.output(self.pos_pins[7 - y], 1)
+            IO.output(self.neg_pins[7 - x], 0)
 
     def display_matrix(self, mat, steps):
         """
