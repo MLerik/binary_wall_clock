@@ -32,4 +32,5 @@ while True:
     if currtime.second == 0:
         print("in here")
         im_idx = np.random.randint(0, len(im_array))
-        led_display.scroll_matrix(matrix=im_array[im_idx], sweeps=10, speed=100)
+        #led_display.scroll_matrix(matrix=im_array[im_idx], sweeps=10, speed=100)
+        led_display.display_matrix(mat=im_array[im_idx],steps=20)
