@@ -36,16 +36,32 @@ class LED_Display():
         self.clear_display()
 
     def clear_display(self):
+        """
+        Clear all leds on display
+        :return:
+        """
         for i in range(8):
             IO.output(pos_pins[7 - i], 1)
             IO.output(neg_pins[7 - i], 0)
 
     def fill_display(self):
+        """
+        light up all the leds of display
+        :return:
+        """
         for i in range(8):
             IO.output(pos_pins[i], 0)
             IO.output(neg_pins[i], 1)
 
     def light_led(self, x, y, sleep_time=-1):
+        """
+        light a specific LED light
+
+        :param x: x-coordinate of LED
+        :param y: y-coordinate of LED
+        :param sleep_time: Duration of LED light pulse
+        :return:
+        """
         IO.output(pos_pins[7 - y], 0)
         IO.output(neg_pins[7 - x], 1)
         if sleep_time > 0:
@@ -54,6 +70,14 @@ class LED_Display():
             IO.output(neg_pins[7 - x], 0)
 
     def display_matrix(self, mat, steps):
+        """
+        Display a 8x8 Matrix on display
+
+        :param mat:
+        :param steps:
+        :return:
+        """
+
         lighted_leds = []
         for y in range(8):
             for x in range(8):
@@ -68,6 +92,7 @@ class LED_Display():
 
     def scroll_matrix(self, matrix, sweeps, speed):
         """
+        Scroll matrix thrgouh display
 
         :param matrix:
         :param sweeps:
