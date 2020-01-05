@@ -23,7 +23,7 @@ minute_pins = [26,19,13,15,14,17]
 second_pins = [21,20,16,12,7,25]
 bin_clock = LedClock(hour_pins, minute_pins, second_pins)
 led_display = LED_Display()
-led_display.scroll_text("# # PUSS OCH KRAM # # KICKI # #", 1, 100)
+led_display.scroll_text("HEYSAAN ERIK OCH AKE , 1, 100)
 while True:
     bin_clock.display_time()
 
